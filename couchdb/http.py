@@ -341,7 +341,7 @@ class Session(object):
                 # line saying, "Presumably, the server closed the connection
                 # before sending a valid response."
                 # Raise as ECONNRESET to simplify retry logic.
-                if e.line == '' or e.line == "''":
+                if e.line.startswith("No status line received") or e.line == '' or e.line == "''":
                     raise socket.error(errno.ECONNRESET)
                 else:
                     raise
